@@ -1,0 +1,69 @@
+.swiper {
+	width: 60%;
+	height: 60vh;
+	border-radius: 15px;
+}
+
+.swiper-slide {
+	text-align: center;
+	font-size: 18px;
+	background: #fff;
+
+	/* Center slide text vertically */
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	-webkit-box-pack: center;
+	-ms-flex-pack: center;
+	-webkit-justify-content: center;
+	justify-content: center;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	-webkit-align-items: center;
+	align-items: center;
+	color: darkslateblue;
+	font-size: 22px;
+}
+
+.swiper-slide img {
+	display: block;
+	width: 60%;
+	height: 60%;
+	object-fit: contain;
+	margin-bottom: 30px;
+	object-position: center center;
+}
+
+.artwork-single {
+	cursor: pointer;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	height: 100%;
+}
+.artwork-detail {
+	display: none;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-between;
+	overflow-y: scroll;
+	color: darkslateblue;
+	font-size: 14px;
+}
+.artwork-detail h4 {
+	margin-bottom: 10px;
+	font-size: 30px;
+}
+.artwork-detail h6 {
+	margin-bottom: 10px;
+	font-size: 22px;
+}
+.artwork-detail ul {
+	list-style: none;
+	font-size: 18px;
+}

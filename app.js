@@ -5,6 +5,7 @@ console.log('Start app.js');
 
 const app = express();
 const PORT = 5522;
+const artworks = require('./controllers/artwork');
 app
 	.set('port', PORT)
 	.set('view engine', 'ejs');
@@ -15,10 +16,11 @@ app
 	.use(express.urlencoded({
 		extended: true
 	}))
+	.use(artworks)
 	.get('/', async (req, res) => {
-		const title = { title: 'Artwork' };
-		return res.render('index', title);
+		return res.render('index');
 	})
+	// .use(departments)
 	.use((req, res, next) => {
 		return res.status(404).json(new Response().error('Method not found'));
 	});

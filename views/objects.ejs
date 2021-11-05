@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Artworks</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1"/>
+    <link rel="stylesheet" href="/public/css/swiper.min.css" />
+	<link rel="stylesheet" href="/public/css/all.css">
+</head>
+<body>
+	<% if (!artworks.length) { %>
+		<h1>Loading data...</h1>
+		<h5 class="retry-btn">
+			<a href="http://localhost:5522/artworks?page=<%- ++page %>">Retry</a>
+		</h5>
+	<% } else { %>
+	<div class="swiper mySwiper">
+		<div class="swiper-wrapper">
+			<% for (let item of artworks ) { %>
+				<div class="swiper-slide">
+					<div class="artwork-single">
+						<div class="artwork-detail">
+							<h4> <%- item.title %> </h4>
+							<h6> Credits: <%- item.creditLine %></h6>
+							<% 	if(item?.measurements) {
+									if (item?.measurements[0]?.elementMeasurements) { %>
+								<ul>Measurements: 
+									<% if(item.measurements[0]?.elementMeasurements?.Depth) { %>
+										<li>Depth: <%- item.measurements[0]?.elementMeasurements.Depth %>cm</li>
+									<% } %>	
+									<% if(item.measurements[0]?.elementMeasurements?.Height) { %>
+										<li>Height: <%- item.measurements[0]?.elementMeasurements.Height %>cm</li>
+									<% } %>	
+									<% if(item.measurements[0]?.elementMeasurements?.Weight) { %>
+										<li>Weight: <%- item.measurements[0]?.elementMeasurements.Weight %>cm</li>
+									<% } %>	
+									<% if(item.measurements[0]?.elementMeasurements?.Width) { %>
+										<li>Width: <%- item.measurements[0]?.elementMeasurements.Width %>cm</li>
+									<% } %>	
+								</ul>
+							<% 		}
+								} %>
+						</div>
+						<img class="artwork-img" src="<%- item.primaryImage ? item.primaryImage : '/public/images/white-image.png' %>" alt="">
+					</div>
+				</div>
+			<% } %>
+		</div>
+		<div class="swiper-pagination"></div>
+	</div> 
+	
+	<a class="new-patch-btn" href="http://localhost:5522/artworks?page=<%- ++page %>">next patch</a>
+	
+	<script src="/public/scripts/jquery.min.js"></script>
+	<script src="/public/scripts/swiper-bundle.min.js"></script>
+	<script>
+		const swiper = new Swiper(".mySwiper", {
+			autoplay: {
+				delay: 10000,
+				disableOnInteraction: false,
+			},
+			pagination: {
+				el: ".swiper-pagination",
+				dynamicBullets: true,
+				type: "fraction",
+			},
+		});
+
+		$( ".artwork-single" ).click(() => {
+			if ($('.artwork-detail').css('display') === 'none') {
+				$('.artwork-detail').css('display', 'flex');
+				$('.artwork-img').css('display', 'none');
+				swiper.autoplay.stop();
+			} else {
+				$('.artwork-detail').css('display', 'none');
+				$('.artwork-img').css('display', 'block');
+				swiper.autoplay.start();
+			}
+		});
+	</script>
+	<% } %>
+
+</body>
+</html>
